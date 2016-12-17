@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket chat</title>
+    <link href="css/main.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>基于WebSocket的在线聊天室</h1>
+        <div>
+            <span class="status">Connecting...</span>
+            <input type="text" name="input" class="input" />
+        </div>
+        <div class="content"></div>
+    </div>
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
