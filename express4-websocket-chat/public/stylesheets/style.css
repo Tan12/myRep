@@ -1,0 +1,62 @@
+body,h1,p{
+  margin: 0; padding: 0;
+}
+body{
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #efeff4;
+}
+.chooseName{
+  display: none;
+}
+.chatBox header{
+  width: 100%;
+  height: 40px;
+  background-color: #333;
+  color: #fff;
+}
+.chatBox h1{
+  font-size: 14px;
+  padding: 10px;
+  position: relative;
+  float: left;
+}
+.chatBox p{
+  padding: 10px;
+  position: relative;
+  float: right;
+}
+.chatBox .chatWindow{
+  width: 98%;
+  height: auto;
+  border-radius: 5px;
+}
+.chatBox .chatInput{
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  position:fixed;
+  bottom: 0;
+  padding-top: 20px;;
+  border: 1px solid transparent;
+  border-top-color: #333;
+  background-color: #fff;
+  justify-content: center;
+}
+.chatBox .chatInput input{
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  outline: none;
+  margin-right: 10px;
+}
+.chatBox .chatInput .message{
+  width: 90%;
+  height: 30px;
+}
+.chatBox .chatInput .send{
+  width: 5%;
+  height: 42px;
+  background-color: transparent;
+  cursor: pointer;
+}
