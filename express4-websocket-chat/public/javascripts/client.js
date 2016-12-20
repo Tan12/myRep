@@ -83,4 +83,8 @@ $(function(){
    $chatWindow.append($section);
   });
 
+  // 退出
+  $userName.siblings('a').click(function(){
+    location.reload();
+  });
 });

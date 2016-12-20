@@ -61,6 +61,7 @@ app.use(function(err, req, res, next){
   res.send('500 - Server Error');
 });
 
+// 主要代码
 var onlineUsers = [];
 var onlineCount = 0;
 io.on('connection', function (socket) {

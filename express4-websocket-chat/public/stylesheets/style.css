@@ -76,6 +76,9 @@ header p{
   position: relative;
   float: right;
 }
+header p a{
+  cursor: pointer;
+}
 .chatBox .chatWindow{
   width: 98%;
   height: auto;
