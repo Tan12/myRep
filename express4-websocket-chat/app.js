@@ -68,7 +68,7 @@ io.on('connection', function (socket) {
 
   socket.on('disconnect', function(){
     console.log(socket.name + ' disconnected');
-    onlineUsers.filter(function(item){
+    onlineUsers = onlineUsers.filter(function(item){
       return item !== socket.name;
     });
     onlineCount--;
