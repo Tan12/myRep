@@ -12,7 +12,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.set('port', process.env.PORT || 3000);
+var port = process.env.PORT || 3000;
+//app.set('port', process.env.PORT || 3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,12 +61,52 @@ app.use(function(err, req, res, next){
   res.send('500 - Server Error');
 });
 
-io.on('connection', function(){
-  console.log('a user connected.');
+var onlineUsers = [];
+var onlineCount = 0;
+io.on('connection', function (socket) {
+  console.log('a user connected');
+
+  socket.on('disconnect', function(){
+    console.log(socket.name + ' disconnected');
+    onlineUsers.filter(function(item){
+      return item !== socket.name;
+    });
+    onlineCount--;
+    socket.broadcast.emit('online',{onlineUsers, onlineCount});
+  });
+
+  socket.on('login', function(name){
+    console.log(name);
+    if(onlineUsers.indexOf(name) !== -1){
+      console.log(onlineUsers.indexOf(name));
+      socket.emit('errorMsg', 'false');
+    }else {
+      socket.emit('errorMsg', 'true');
+      onlineUsers.push(name);
+      socket.name = name;
+      onlineCount++;
+      socket.emit('online',{onlineUsers, onlineCount});
+      // 广播让其他用户也知道有新用户进入
+      socket.broadcast.emit('online',{onlineUsers, onlineCount});
+    }
+  });
+
+  socket.on('message', function(obj){
+    socket.broadcast.emit('msg', obj);
+    console.log(obj.msg);
+    console.log(obj.name + ' say: ' + obj.msg);
+  });
+
+}); // connection 监听结束
+
+http.listen(port, function(){
+  console.log('express started on http://localhost:' + port + '.');
 });
 
+/*
 app.listen(app.get('port'), function(){
   console.log('express started on http://localhost:' + app.get('port') + '.');
 });
+*/
 
 module.exports = app;

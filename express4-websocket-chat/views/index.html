@@ -6,10 +6,11 @@
   </head>
   <body>
     <div class="chooseName">
-      <form class="inputName">
-        <input type="text" name="name" placeholder="请输入名字..." />
-        <input type="submit" name="submit" value="提交" />
+      <form class="inputName" action="">
+        <input type="text" name="name" class="getName" placeholder="请输入名字..." autocomplete="off" />
+        <button class="submit">提交</button>
       </form>
+      <span></span>
     </div>
     <div class="chatBox">
       <header>
@@ -19,15 +20,19 @@
 
       <p class="onlinePeople"></p>
 
-      <div class="chatWindow">
-      </div>
+      <div class="chatWindow"></div>
 
-      <div class="chatInput">
-        <input type="text" name="message" class="message" />
-        <input type="submit" name="send" class="send" />
+      <div class="bottomForm">
+        <form class="chatForm" action="">
+              <input type="text" name="message" class="message" autocomplete="off" />
+              <button class="send">发送</button>
+        </form>
+        <span>请输入内容!</span>
       </div>
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="javascripts/jquery-3.1.1.min.js"></script>
+    <script src="javascripts/client.js"></script>
   </body>
 </html>

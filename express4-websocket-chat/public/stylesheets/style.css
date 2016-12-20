@@ -5,7 +5,58 @@ body{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #efeff4;
 }
+.chooseName span,
+.bottomForm span{
+  display: none;
+  color: red;
+  margin-left: 20px;
+  margin-top: 10px;
+}
 .chooseName{
+  position: absolute;;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.chooseName .inputName .getName{
+  width: 150px;
+  height: 25px;
+}
+.chooseName .inputName .submit{
+  width: 50px;
+  height: 37px;
+  cursor: pointer;
+}
+
+.chatWindow{
+  width: 100%;
+  height: auto;
+}
+.chatWindow p{
+  display: inline-block;
+  position:relative;
+  max-width: 250px;
+  padding:10px 14px;
+  margin:0 20px 0 10px;
+  border-radius:10px;
+  background-color:#fff;
+  box-shadow: inset 0 0 1px #fff;
+  vertical-align: top;
+}
+section{
+  margin-top: 10px;
+  clear: both;
+}
+.user{
+  float: right;
+}
+.system{
+  text-align: center;
+}
+.others{
+  margin-left: 20px;
+}
+.chatBox{
   display: none;
 }
 .chatBox header{
@@ -20,7 +71,7 @@ body{
   position: relative;
   float: left;
 }
-.chatBox p{
+header p{
   padding: 10px;
   position: relative;
   float: right;
@@ -30,33 +81,40 @@ body{
   height: auto;
   border-radius: 5px;
 }
-.chatBox .chatInput{
-  text-align: center;
+.chatBox .bottomForm{
   width: 100%;
   height: 100px;
-  display: flex;
   position:fixed;
   bottom: 0;
-  padding-top: 20px;;
+  padding-top: 20px;
   border: 1px solid transparent;
   border-top-color: #333;
   background-color: #fff;
+}
+.chatBox .bottomForm .chatForm{
+  display: flex;
   justify-content: center;
 }
-.chatBox .chatInput input{
+.chooseName .inputName input,
+.chooseName .inputName button,
+.chatBox .bottomForm .chatForm input,
+.chatBox .bottomForm .chatForm button{
   padding: 5px;
   border-radius: 10px;
   border: 1px solid #333;
   outline: none;
   margin-right: 10px;
 }
-.chatBox .chatInput .message{
+.chatBox .bottomForm .chatForm .message{
   width: 90%;
   height: 30px;
 }
-.chatBox .chatInput .send{
+.chatBox .bottomForm .chatForm .send{
   width: 5%;
   height: 42px;
   background-color: transparent;
   cursor: pointer;
+}
+.chatBox .bottomForm .chatForm .send:hover{
+  background-color: #ccc;
 }
