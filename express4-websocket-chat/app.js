@@ -74,8 +74,13 @@ io.on('connection', function (socket) {
     });
     if(typeof(socket.name) !== 'undefined'){
       onlineCount--;
+      socket.broadcast.emit('online',{
+        "users" : onlineUsers,
+        "count" : onlineCount,
+        "name" : socket.name,
+        "type" : "leave"
+      });
     }
-    socket.broadcast.emit('online',{onlineUsers, onlineCount});
   });
 
   socket.on('login', function(name){
@@ -88,9 +93,17 @@ io.on('connection', function (socket) {
       onlineUsers.push(name);
       socket.name = name;
       onlineCount++;
-      socket.emit('online',{onlineUsers, onlineCount});
+      socket.emit('online',{
+        "users" : onlineUsers,
+        "count" : onlineCount
+      });
       // 广播让其他用户也知道有新用户进入
-      socket.broadcast.emit('online',{onlineUsers, onlineCount});
+      socket.broadcast.emit('online',{
+        "users" : onlineUsers,
+        "count" : onlineCount,
+        "name" : socket.name,
+        "type" : "login"
+      });
     }
   });
 

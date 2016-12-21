@@ -31,6 +31,7 @@ $(function(){
         $chooseName.children('span').text('该用户已存在！').show();
       }else{
         $userName.text(obj.name + ' | ');
+        socket.emit('newone', obj.name);
         $chooseName.hide();
         $chatBox.show();
         $getName.val('');
@@ -47,7 +48,20 @@ $(function(){
   });
 
   socket.on('online', function(online) {
-    $onlinePeople.text('当前一共'+ online.onlineCount + '人在线： ' + online.onlineUsers.join('、'));
+    $onlinePeople.text('当前一共'+ online.count + '人在线： ' + online.users.join('、'));
+    if($chatBox.is(":visible")){
+      if(online.type === 'login'){
+        var $section = $('<section>');
+        var $p = $("<p>").text("欢迎" + online.name + "来到聊天室");
+        $chatWindow.append($p);
+      }else if (online.type === 'leave') {
+        var $section = $('<section>');
+        var $p = $('<p>').text(online.name + "离开聊天室");
+      }
+      $section.addClass('system');
+      $section.append($p);
+      $chatWindow.append($section);
+    }
   });
 
   // 提交消息
@@ -60,7 +74,7 @@ $(function(){
     socket.emit('message', obj);
     var $section = $('<section>');
     var $span = $('<span>').text(obj.name);
-    var $p = $('<p>').text(obj.msg);
+    var $p = $('<div>').text(obj.msg);
     $section.addClass('user');
     $section.append($p).append($span);
     $chatWindow.append($section);
@@ -85,12 +99,11 @@ $(function(){
    if($chatBox.is(":visible")){
      var $section = $('<section>');
      var $span = $('<span>').text(msg.name);
-     var $p = $('<p>').text(msg.msg);
+     var $p = $('<div>').text(msg.msg);
      $section.addClass('others');
      $section.append($span).append($p);
      $chatWindow.append($section);
    }
-
    // 使滚动条保持在底部，即显示最新消息
    if(heightChange()){
      $(window).scrollTop(height);
