@@ -28,11 +28,23 @@ body{
   cursor: pointer;
 }
 
-.chatWindow{
-  width: 100%;
-  height: auto;
+.chatBox .onlinePeople{
+  margin-top: 10px;
+  margin-left: 10px;
 }
-.chatWindow p{
+
+.chatBox .chatWindow{
+  width: 100%;
+  padding-bottom: 130px;
+}
+/* 使div高度自适应 */
+.chatBox .chatWindow::after{
+  display: block;
+  clear: both;
+  height: 0;
+  content: '';
+}
+.chatBox .chatWindow p{
   display: inline-block;
   position:relative;
   max-width: 250px;
@@ -49,6 +61,7 @@ section{
 }
 .user{
   float: right;
+  margin-right: 20px;
 }
 .system{
   text-align: center;
@@ -78,11 +91,6 @@ header p{
 }
 header p a{
   cursor: pointer;
-}
-.chatBox .chatWindow{
-  width: 98%;
-  height: auto;
-  border-radius: 5px;
 }
 .chatBox .bottomForm{
   width: 100%;

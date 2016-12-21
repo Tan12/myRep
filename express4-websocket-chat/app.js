@@ -72,7 +72,9 @@ io.on('connection', function (socket) {
     onlineUsers = onlineUsers.filter(function(item){
       return item !== socket.name;
     });
-    onlineCount--;
+    if(typeof(socket.name) !== 'undefined'){
+      onlineCount--;
+    }
     socket.broadcast.emit('online',{onlineUsers, onlineCount});
   });
 

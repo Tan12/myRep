@@ -11,7 +11,8 @@ $(function(){
       $chatForm = $('.chatForm'),
       $message = $('.message'),
       $send = $('send'),
-      obj = {};
+      obj = {},
+      height = $chatWindow.height();
 
   //var socket = io.connect('http://localhost:3000');
   var socket = io();
@@ -64,6 +65,11 @@ $(function(){
     $section.append($p).append($span);
     $chatWindow.append($section);
     $message.val('');
+
+    // 使滚动条保持在底部，即显示最新消息
+    if(heightChange()){
+      $(window).scrollTop(height);
+    }
     return false;
   });
 
@@ -74,16 +80,33 @@ $(function(){
   });
 
   socket.on('msg', function (msg) {
-   //console.log(msg);
-   var $section = $('<section>');
-   var $span = $('<span>').text(msg.name);
-   var $p = $('<p>').text(msg.msg);
-   $section.addClass('others');
-   $section.append($span).append($p);
-   $chatWindow.append($section);
+   // console.log(msg);
+   // chatBox显示了才开始加载消息
+   if($chatBox.is(":visible")){
+     var $section = $('<section>');
+     var $span = $('<span>').text(msg.name);
+     var $p = $('<p>').text(msg.msg);
+     $section.addClass('others');
+     $section.append($span).append($p);
+     $chatWindow.append($section);
+   }
+
+   // 使滚动条保持在底部，即显示最新消息
+   if(heightChange()){
+     $(window).scrollTop(height);
+   }
   });
 
-  // 退出
+  // 判断chatWindow高度是否发生改变
+  function heightChange(){
+    if($chatWindow.height() > height){
+      height = $chatWindow.height();
+      return 1;
+    }
+    return 0;
+  }
+
+  // 退出，直接刷新页面
   $userName.siblings('a').click(function(){
     location.reload();
   });
